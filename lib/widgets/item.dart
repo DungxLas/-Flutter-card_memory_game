@@ -1,15 +1,15 @@
-//import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 class Item extends StatelessWidget {
-  const Item({super.key, required this.path});
+  const Item({super.key, required this.path, required this.click});
 
   final String? path;
+  final Function click;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return GestureDetector(
+      onTap: () => click(),
       child: Image.asset(
         path!,
         height: 50,
