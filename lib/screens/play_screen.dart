@@ -1,8 +1,8 @@
-import 'dart:math';
-
-import 'package:card_memory_game/data/collection.dart';
-import 'package:card_memory_game/widgets/item.dart';
 import 'package:flutter/material.dart';
+
+import '../data/collection.dart';
+import '../data/model/images_list.dart';
+import '../widgets/item.dart';
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({super.key});
@@ -12,8 +12,7 @@ class PlayScreen extends StatefulWidget {
 }
 
 class _PlayScreenState extends State<PlayScreen> {
-  var random = Random();
-  final List<Map<String, String>> image = imageData;
+  final ImagesList imageData = data.createQuiz();
 
   int itemCheck = 0;
   List<String> itemClicked = [];
@@ -46,9 +45,10 @@ class _PlayScreenState extends State<PlayScreen> {
         crossAxisSpacing: 4,
         mainAxisSpacing: 8,
         children: [
-          ...image.map((item) => Item(
-                path: item['image'],
-                click: () => checkResult(item['animal']!),
+          ...imageData.list.map((item) => Item(
+                path: item.front,
+                //click: () => checkResult(item['animal']!),
+                click: () {},
               )),
           Text(itemCheck.toString()),
         ],
