@@ -33,6 +33,7 @@ class Item extends StatelessWidget {
         //onTap: () => click(),
         onTap: () {
           cardKey.currentState!.toggleCard();
+          click();
         },
         child: Image.asset(
           'lib/assets/image/question_mark.png',

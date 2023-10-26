@@ -18,23 +18,37 @@ class _PlayScreenState extends State<PlayScreen> {
   List<String> itemClicked = [];
 
   void checkResult(String item) {
-    setState(() {
-      //them anh vao list xem xet
-      itemCheck++;
-      itemClicked.add(item);
+    // setState(() {
+    //   //them anh vao list xem xet
+    //   itemCheck++;
+    //   itemClicked.add(item);
 
-      if (itemCheck == 2) {
-        itemCheck = 0;
-        //kiem tra ket qua
-        if (itemClicked[0] == itemClicked[1]) {
-          print('dung');
-        } else {
-          print('sai');
-        }
-        itemClicked.clear();
-        return;
+    //   if (itemCheck == 2) {
+    //     itemCheck = 0;
+    //     //kiem tra ket qua
+    //     if (itemClicked[0] == itemClicked[1]) {
+    //       print('dung');
+    //     } else {
+    //       print('sai');
+    //     }
+    //     itemClicked.clear();
+    //     return;
+    //   }
+    // });
+    itemCheck++;
+    itemClicked.add(item);
+
+    if (itemCheck == 2) {
+      itemCheck = 0;
+      //kiem tra ket qua
+      if (itemClicked[0] == itemClicked[1]) {
+        print('dung');
+      } else {
+        print('sai');
       }
-    });
+      itemClicked.clear();
+      return;
+    }
   }
 
   @override
@@ -47,8 +61,7 @@ class _PlayScreenState extends State<PlayScreen> {
         children: [
           ...imageData.list.map((item) => Item(
                 path: item.front,
-                //click: () => checkResult(item['animal']!),
-                click: () {},
+                click: () => checkResult(item.id),
               )),
           Text(itemCheck.toString()),
         ],
