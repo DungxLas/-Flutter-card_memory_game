@@ -2,6 +2,7 @@ import 'package:card_memory_game/data/model/image_q.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 import '../providers/card_checked_provider.dart';
 
@@ -24,7 +25,7 @@ class Item extends ConsumerWidget {
       //autoFlipDuration: const Duration(seconds: 2),
       front: GestureDetector(
         onTap: () {
-          cardKey.currentState!.toggleCard();
+          //cardKey.currentState!.toggleCard();
         },
         child: Image.asset(
           image.front,
@@ -37,9 +38,12 @@ class Item extends ConsumerWidget {
         onTap: () {
           cardKey.currentState!.toggleCard();
 
-          ss.cardToggle(image.id, cardKey);
-          if (ss.length() >= 2) {
+          final token = const Uuid().v4();
+          ss.cardToggle(token, image.id, cardKey);
+
+          if (ss.length() % 2 == 0) {
             // kiem tra
+            ss.checkResult(token);
           }
         },
         child: Image.asset(

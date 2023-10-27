@@ -5,8 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class CardCheckedNotifier extends StateNotifier<List<Map<String, dynamic>>> {
   CardCheckedNotifier() : super([]);
 
-  void cardToggle(String id, GlobalKey<FlipCardState> keyCard) {
+  void cardToggle(String token, String id, GlobalKey<FlipCardState> keyCard) {
     Map<String, dynamic> newItem = {
+      'token': token,
       'id': id,
       'key': keyCard,
     };
@@ -15,6 +16,16 @@ class CardCheckedNotifier extends StateNotifier<List<Map<String, dynamic>>> {
 
   int length() {
     return state.length;
+  }
+
+  void checkResult(String token) {
+    int index = state.indexWhere((element) => element['token'] == token);
+    if (state[index - 1]['id'] != state[index]['id']) {
+      Future.delayed(const Duration(seconds: 1), () {
+        state[index - 1]['key'].currentState!.toggleCard();
+        state[index]['key'].currentState!.toggleCard();
+      });
+    }
   }
 }
 
