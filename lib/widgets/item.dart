@@ -1,19 +1,20 @@
+import 'package:card_memory_game/data/model/image_q.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Item extends StatelessWidget {
-  Item(
-      {super.key,
-      required this.path,
-      required this.click,
-      required this.cardKey});
+import '../providers/card_checked_provider.dart';
 
-  final String? path;
-  final Function click;
-  final GlobalKey<FlipCardState> cardKey;
+class Item extends ConsumerWidget {
+  Item({super.key, required this.image});
+
+  final ImageQ image;
+
+  final GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ss = ref.read(cardChecked.notifier);
     return FlipCard(
       // fill: Fill
       //     .fillBack, // Fill the back side of the card to make in the same size as the front.
@@ -24,27 +25,22 @@ class Item extends StatelessWidget {
       front: GestureDetector(
         onTap: () {
           cardKey.currentState!.toggleCard();
-          // Future.delayed(Duration(seconds: 2), () {
-          //   cardKey.currentState!.toggleCard();
-          // });
         },
         child: Image.asset(
-          path!,
+          image.front,
           height: 50,
           width: 50,
           fit: BoxFit.cover,
         ),
       ),
       back: GestureDetector(
-        //onTap: () => click(),
         onTap: () {
           cardKey.currentState!.toggleCard();
-          // bool check = click();
-          // if (!check) {
-          //   Future.delayed(const Duration(seconds: 2), () {
-          //     cardKey.currentState!.toggleCard();
-          //   });
-          // }
+
+          ss.cardToggle(image.id, cardKey);
+          if (ss.length() >= 2) {
+            // kiem tra
+          }
         },
         child: Image.asset(
           'lib/assets/image/question_mark.png',
