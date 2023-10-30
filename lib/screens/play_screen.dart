@@ -1,3 +1,4 @@
+import 'package:card_memory_game/widgets/countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,18 +18,30 @@ class _PlayScreenState extends ConsumerState<PlayScreen> {
     final cardData = ref.watch(listCard);
 
     return Scaffold(
-      body: GridView.count(
-        crossAxisCount: 3,
-        crossAxisSpacing: 4,
-        mainAxisSpacing: 8,
-        children: [
-          ...cardData.map((item) {
-            return Item(
-              image: item,
-            );
-          }),
-          //Text(itemCheck.toString()),
-        ],
+      body: Container(
+        margin: const EdgeInsets.only(top: 30),
+        child: Column(
+          children: [
+            const CountdownTimer(
+              start: 10,
+            ),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 3,
+                crossAxisSpacing: 4,
+                mainAxisSpacing: 8,
+                children: [
+                  ...cardData.map((item) {
+                    return Item(
+                      image: item,
+                    );
+                  }),
+                  //Text(itemCheck.toString()),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

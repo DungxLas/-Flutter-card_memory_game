@@ -1,4 +1,5 @@
 import 'package:card_memory_game/screens/play_screen.dart';
+import 'package:card_memory_game/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,7 +17,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const PlayScreen(),
+      routes: {
+        '/start_screen': (context) => const StartScreen(),
+        '/play_screen': (context) => const PlayScreen(),
+      },
+      initialRoute: '/start_screen',
+      //home: const PlayScreen(),
     );
   }
 }
