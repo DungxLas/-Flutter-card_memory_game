@@ -21,9 +21,9 @@ class _StartScreenState extends State<StartScreen>
       vsync: this,
     );
 
-    _animation = Tween<double>(begin: 0, end: 24).animate(_controller)
+    _animation = Tween<double>(begin: 0, end: 36).animate(_controller)
       ..addListener(() {
-        if (_animation.value >= 24) {
+        if (_animation.value >= 36) {
           _controller.stop();
         }
       });
@@ -40,6 +40,7 @@ class _StartScreenState extends State<StartScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: Center(
         child: AnimatedBuilder(
           animation: _animation,
@@ -51,6 +52,7 @@ class _StartScreenState extends State<StartScreen>
               'Let Play',
               style: TextStyle(
                 fontSize: _animation.value,
+                color: Colors.yellow,
               ),
             ),
           ),

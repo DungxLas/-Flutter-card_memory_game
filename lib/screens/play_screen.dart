@@ -13,6 +13,7 @@ class PlayScreen extends ConsumerStatefulWidget {
 }
 
 class _PlayScreenState extends ConsumerState<PlayScreen> {
+  final isProcessing = ValueNotifier<bool>(false);
   @override
   Widget build(BuildContext context) {
     final cardData = ref.watch(listCard);
@@ -23,7 +24,7 @@ class _PlayScreenState extends ConsumerState<PlayScreen> {
         child: Column(
           children: [
             const CountdownTimer(
-              start: 10,
+              start: 30,
             ),
             Expanded(
               child: GridView.count(
@@ -34,9 +35,9 @@ class _PlayScreenState extends ConsumerState<PlayScreen> {
                   ...cardData.map((item) {
                     return Item(
                       image: item,
+                      isProcessing: isProcessing,
                     );
                   }),
-                  //Text(itemCheck.toString()),
                 ],
               ),
             ),

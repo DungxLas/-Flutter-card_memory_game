@@ -18,10 +18,14 @@ class CardCheckedNotifier extends StateNotifier<List<Map<String, dynamic>>> {
     return state.length;
   }
 
+  void clear() {
+    state.clear();
+  }
+
   void checkResult(String token) {
     int index = state.indexWhere((element) => element['token'] == token);
     if (state[index - 1]['id'] != state[index]['id']) {
-      Future.delayed(const Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 5), () {
         state[index - 1]['key'].currentState!.toggleCard();
         state[index]['key'].currentState!.toggleCard();
       });
