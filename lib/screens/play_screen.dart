@@ -35,17 +35,7 @@ class _PlayScreenState extends ConsumerState<PlayScreen> {
   @override
   Widget build(BuildContext context) {
     cardData = ref.watch(listCard);
-    gridCard = cardData.map((item) {
-      return Item(
-        image: item,
-        onHideItem: () {
-          //hideItem(item.id);
-          setState(() {
-            gridCard = [];
-          });
-        },
-      );
-    }).toList();
+    
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.only(top: 30),
@@ -54,23 +44,7 @@ class _PlayScreenState extends ConsumerState<PlayScreen> {
             const CountdownTimer(
               start: 30,
             ),
-            Expanded(
-              child: GridView.builder(
-                itemCount: gridCard.length + 1,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 4,
-                  mainAxisSpacing: 8,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == 0) {
-                    return const SizedBox(height: 50, width: 50);
-                  } else {
-                    return gridCard[index - 1];
-                  }
-                },
-              ),
-            ),
+            ,
           ],
         ),
       ),
