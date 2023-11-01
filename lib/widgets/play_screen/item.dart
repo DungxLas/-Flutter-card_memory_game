@@ -1,10 +1,10 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
-import '../data/model/image_q.dart';
+import '../../data/model/image_q.dart';
 
-class Item1 extends StatelessWidget {
-  const Item1({
+class Item extends StatelessWidget {
+  const Item({
     super.key,
     required this.image,
     required this.cardKey,

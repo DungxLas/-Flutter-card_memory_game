@@ -1,9 +1,8 @@
-import 'package:card_memory_game/data/collection.dart';
-import 'package:card_memory_game/widgets/item1.dart';
+import 'package:card_memory_game/widgets/play_screen/item.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
-import '../data/model/image_q.dart';
+import '../../data/model/image_q.dart';
 
 class GridItem extends StatefulWidget {
   const GridItem({super.key, required this.data});
@@ -94,7 +93,7 @@ class _GridItemState extends State<GridItem> {
           mainAxisSpacing: 8,
         ),
         itemBuilder: (BuildContext context, int index) {
-          return Item1(
+          return Item(
             image: widget.data[index],
             cardKey: cardKeys[index],
             flipOnTouch: listFlipOnTouch[index],

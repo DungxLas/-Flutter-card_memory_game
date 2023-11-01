@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:card_memory_game/widgets/end_game/timeout_dialog.dart';
 import 'package:flutter/material.dart';
 
 class CountdownTimer extends StatefulWidget {
@@ -27,19 +28,10 @@ class _CountdownTimerState extends State<CountdownTimer> {
             timer.cancel();
             showDialog(
               context: context,
+              barrierDismissible:
+                  true, // Ngăn chặn việc đóng hộp thoại khi nhấn bên ngoài
               builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text('Notice'),
-                  content: const Text('Time Out'),
-                  actions: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/start_screen');
-                      },
-                      child: const Text('Restart'),
-                    ),
-                  ],
-                );
+                return const TimeOutDialog();
               },
             );
           } else {
@@ -62,12 +54,6 @@ class _CountdownTimerState extends State<CountdownTimer> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text('Thoi gian con lai: $_seconds'),
-        // ElevatedButton(
-        //   onPressed: () {
-        //     startTimer();
-        //   },
-        //   child: const Text('Start'),
-        // ),
       ],
     );
   }
