@@ -24,7 +24,7 @@ class _PlayScreenState extends ConsumerState<PlayScreen> {
         child: Column(
           children: [
             const CountdownTimer(
-              start: 30,
+              start: 5,
             ),
             GridItem(data: cardData),
           ],

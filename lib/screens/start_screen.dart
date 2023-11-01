@@ -21,9 +21,9 @@ class _StartScreenState extends State<StartScreen>
       vsync: this,
     );
 
-    _animation = Tween<double>(begin: 0, end: 36).animate(_controller)
+    _animation = Tween<double>(begin: 0, end: 48).animate(_controller)
       ..addListener(() {
-        if (_animation.value >= 36) {
+        if (_animation.value >= 48) {
           _controller.stop();
         }
       });

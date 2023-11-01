@@ -4,7 +4,7 @@ import 'package:card_memory_game/widgets/end_game/timeout_dialog.dart';
 import 'package:flutter/material.dart';
 
 class CountdownTimer extends StatefulWidget {
-  const CountdownTimer({super.key, required this.start});
+  const CountdownTimer({Key? key, required this.start}) : super(key: key);
   final int start;
 
   @override
@@ -29,7 +29,8 @@ class _CountdownTimerState extends State<CountdownTimer> {
             showDialog(
               context: context,
               barrierDismissible:
-                  true, // Ngăn chặn việc đóng hộp thoại khi nhấn bên ngoài
+                  false, // Ko cho phép đóng hộp thoại khi nhấn bên ngoài
+              barrierColor: Colors.black87,
               builder: (BuildContext context) {
                 return const TimeOutDialog();
               },
