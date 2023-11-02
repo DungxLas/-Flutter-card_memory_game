@@ -1,18 +1,20 @@
+import 'package:card_memory_game/providers/match_provider.dart';
 import 'package:card_memory_game/widgets/play_screen/item.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/model/image_q.dart';
 
-class GridItem extends StatefulWidget {
+class GridItem extends ConsumerStatefulWidget {
   const GridItem({super.key, required this.data});
   final List<ImageQ> data;
 
   @override
-  State<GridItem> createState() => _GridItemState();
+  ConsumerState<GridItem> createState() => _GridItemState();
 }
 
-class _GridItemState extends State<GridItem> {
+class _GridItemState extends ConsumerState<GridItem> {
   late List<GlobalKey<FlipCardState>> cardKeys;
   List<int> flippedIndices = [];
   late List<bool> listFlipOnTouch;
@@ -51,6 +53,9 @@ class _GridItemState extends State<GridItem> {
         if (item1 == item2) {
           itemMatch.add(flippedIndices[0]);
           itemMatch.add(flippedIndices[1]);
+          if (itemMatch.length == cardKeys.length) {
+            ref.read(matchChecked.notifier).setStatus(true);
+          }
           for (var i = 0; i < listFlipOnTouch.length; i++) {
             if (itemMatch.contains(i)) {
               listFlipOnTouch[i] = false;

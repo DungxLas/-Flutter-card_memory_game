@@ -1,17 +1,19 @@
 import 'dart:async';
 
+import 'package:card_memory_game/providers/match_provider.dart';
 import 'package:card_memory_game/widgets/end_game/timeout_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CountdownTimer extends StatefulWidget {
+class CountdownTimer extends ConsumerStatefulWidget {
   const CountdownTimer({Key? key, required this.start}) : super(key: key);
   final int start;
 
   @override
-  State<CountdownTimer> createState() => _CountdownTimerState();
+  ConsumerState<CountdownTimer> createState() => _CountdownTimerState();
 }
 
-class _CountdownTimerState extends State<CountdownTimer> {
+class _CountdownTimerState extends ConsumerState<CountdownTimer> {
   late Timer _timer;
   late int _seconds;
 
@@ -24,6 +26,22 @@ class _CountdownTimerState extends State<CountdownTimer> {
       const Duration(seconds: 1),
       (timer) => setState(
         () {
+          if (ref.watch(matchChecked)) {
+            timer.cancel();
+            showDialog(
+              context: context,
+              barrierDismissible:
+                  false, // Ko cho phép đóng hộp thoại khi nhấn bên ngoài
+              barrierColor: Colors.black87,
+              builder: (BuildContext context) {
+                return const TimeOutDialog(
+                  title: 'Congratulation!!!',
+                  content:
+                      'You have completed the challenge. If you want to play again, click "Restart"',
+                );
+              },
+            );
+          }
           if (_seconds < 1) {
             timer.cancel();
             showDialog(
@@ -32,7 +50,11 @@ class _CountdownTimerState extends State<CountdownTimer> {
                   false, // Ko cho phép đóng hộp thoại khi nhấn bên ngoài
               barrierColor: Colors.black87,
               builder: (BuildContext context) {
-                return const TimeOutDialog();
+                return const TimeOutDialog(
+                  title: 'Time Out!!!',
+                  content:
+                      'Sorry, your time is up. If you want to continue the challenge, click "Restart"',
+                );
               },
             );
           } else {

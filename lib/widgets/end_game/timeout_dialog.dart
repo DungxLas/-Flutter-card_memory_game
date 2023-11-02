@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
-class TimeOutDialog extends StatefulWidget {
-  const TimeOutDialog({Key? key}) : super(key: key);
+class TimeOutDialog extends StatelessWidget {
+  const TimeOutDialog({Key? key, required this.title, required this.content})
+      : super(key: key);
+  final String title;
+  final String content;
 
-  @override
-  State<TimeOutDialog> createState() => _TimeOutDialogState();
-}
-
-class _TimeOutDialogState extends State<TimeOutDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Notice'),
-      content: const Text('Time Out'),
+      title: Text(title),
+      content: Text(content),
       actions: [
         ElevatedButton(
           onPressed: () {

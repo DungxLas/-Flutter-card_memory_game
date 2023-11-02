@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StartScreen extends StatefulWidget {
+import '../providers/match_provider.dart';
+
+class StartScreen extends ConsumerStatefulWidget {
   const StartScreen({super.key});
 
   @override
-  State<StartScreen> createState() => _StartScreenState();
+  ConsumerState<StartScreen> createState() => _StartScreenState();
 }
 
-class _StartScreenState extends State<StartScreen>
+class _StartScreenState extends ConsumerState<StartScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -46,6 +49,7 @@ class _StartScreenState extends State<StartScreen>
           animation: _animation,
           builder: (context, child) => TextButton(
             onPressed: () {
+              ref.read(matchChecked.notifier).setStatus(false);
               Navigator.pushNamed(context, '/play_screen');
             },
             child: Text(
