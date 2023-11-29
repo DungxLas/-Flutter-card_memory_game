@@ -76,7 +76,7 @@ class _CountdownTimerState extends ConsumerState<CountdownTimer> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Thoi gian con lai: $_seconds'),
+        Text('Time remaining: $_seconds'),
       ],
     );
   }
